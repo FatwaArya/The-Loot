@@ -5,6 +5,7 @@ module.exports = {
   content: ["./public/css/**/*.{php,js}",
     "./partials/**/*.{php,js}",
     "./src/admin/**/*.{php,js}",
+    "./src/user/**/*.{php,j}",
     "./index.php",
     "./login.php",
     "./register.php",

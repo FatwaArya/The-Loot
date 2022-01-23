@@ -53,23 +53,27 @@ checkLogin();
                 $qry_product = mysqli_query($conn, "select * from barang");
 
                 ?>
-                <?php while ($dt_product = mysqli_fetch_array($qry_product)) { ?>
 
-                    <div class="max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex ">
-                        <a href="#">
-                            <img class="p-8 rounded-t-lg" src="../admin/product_img/<?= $dt_product['img'] ?>" alt="product image">
-                        </a>
-                        <div class="px-5 pb-5">
-                            <a href="#">
+                <div class="flex flex-wrap gap-4">
+                    <?php while ($dt_product = mysqli_fetch_array($qry_product)) { ?>
+
+                        <div class="w-[4rem] bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">
+
+                            <img class=" object-scale-down max-w-xs" src="../admin/product_img/<?= $dt_product['img'] ?>" alt="product image">
+
+                            <div class="px-5 pb-5 ">
+
                                 <h3 class="my-1 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"><?= $dt_product['nama_barang'] ?></h3>
-                            </a>
-                            <div class="flex justify-between items-center">
-                                <span class="text-3xl font-bold text-gray-900 dark:text-white">$<?= $dt_product['harga_awal'] ?></span>
-                                <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Bid</a>
+                                </a>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-3xl font-bold text-gray-900 dark:text-white">$<?= $dt_product['harga_awal'] ?></span>
+                                    <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Bid</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
+
             </div>
         </div>
 
