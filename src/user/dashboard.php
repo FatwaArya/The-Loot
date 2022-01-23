@@ -40,34 +40,34 @@ checkLogin();
 
         </div>
         <!-- code here -->
-        <div class="mx-auto">
+        <div class="flex flex-col mx-auto ">
             <div class="header mx-auto font-silk mt-10">
                 <h1 class="font-bold text-center text-5xl">Auction Dashboard</h1>
                 <p class="text-2xl text-center mt-1">Bid your item here.</p>
             </div>
 
             <div class="mt-20 mx-36">
-                <h1 class="font-OpenSauce text-left">Featured Items</h1>
+                <h1 class="font-OpenSauce text-left text-base font-bold mb-2">Featured Items</h1>
 
                 <?php include "../util/conn.php";
                 $qry_product = mysqli_query($conn, "select * from barang");
 
                 ?>
 
-                <div class="flex flex-wrap gap-4">
+                <div class="grid grid-cols-4 gap-4">
                     <?php while ($dt_product = mysqli_fetch_array($qry_product)) { ?>
 
-                        <div class="w-[4rem] bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">
+                        <div class="font-OpenSauce flex flex-col justify-between">
 
-                            <img class=" object-scale-down max-w-xs" src="../admin/product_img/<?= $dt_product['img'] ?>" alt="product image">
+                            <img class="object-scale-down h-48 w-96" src="../admin/product_img/<?= $dt_product['img'] ?>" alt="product image">
 
-                            <div class="px-5 pb-5 ">
+                            <div class="px-5 pb-5 mt-5">
 
                                 <h3 class="my-1 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"><?= $dt_product['nama_barang'] ?></h3>
                                 </a>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-3xl font-bold text-gray-900 dark:text-white">$<?= $dt_product['harga_awal'] ?></span>
-                                    <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Bid</a>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-xl font-light text-gray-900 dark:text-white">$<?= $dt_product['harga_awal'] ?></span>
+                                    <a href="#" class="text-white bg-black hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-none text-sm px-5 py-2 text-center ">Bid</a>
                                 </div>
                             </div>
                         </div>
