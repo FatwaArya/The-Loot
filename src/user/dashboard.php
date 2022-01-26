@@ -67,7 +67,7 @@ checkLogin();
                                 </a>
                                 <div class="flex justify-between items-center mt-2">
                                     <span class="text-xl font-light text-gray-900 dark:text-white">$<?= $dt_product['harga_awal'] ?></span>
-                                    <a href="#" class="text-white bg-black hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-none text-sm px-5 py-2 text-center ">Bid</a>
+                                    <a href="item.php?id_product=<?= $dt_product['id'] ?>" class="text-white bg-black hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-none text-sm px-5 py-2 text-center ">Bid</a>
                                 </div>
                             </div>
                         </div>
