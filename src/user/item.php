@@ -61,6 +61,7 @@ $dt_bid = mysqli_fetch_array($qry_bid);
 
 
                                     ?> </p>
+                <p><?= ucfirst($dt_bid['status']) ?></p>
             </div>
 
         </div>
@@ -90,7 +91,16 @@ $dt_bid = mysqli_fetch_array($qry_bid);
         function checkHighestBid() {
             let inputPrice = document.getElementById('price').value;
 
-            if (inputPrice <= <?= $dt_product['harga_awal'] ?>) {
+            if (inputPrice <= <?php
+
+                                if (!isset($dt_bid['harga_akhir'])) {
+                                    echo $dt_product['harga_awal'];
+                                } else {
+                                    echo $dt_bid['harga_akhir'];
+                                }
+
+
+                                ?>) {
 
                 alert('Bid More!')
                 event.preventDefault();
