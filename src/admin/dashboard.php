@@ -46,7 +46,7 @@ allow_page_access_exclusive(["admin", "staff"])
             </div>
 
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-4 mt-10">
 
                 <div class="flex flex-col ">
                     <h1 class="">Registered Items</h1>
@@ -106,6 +106,81 @@ allow_page_access_exclusive(["admin", "staff"])
                     </div>
                 </div>
 
+                <div class="flex flex-col ">
+                    <h1 class="">Bidding items</h1>
+                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                            <div class="overflow-hidden shadow-md sm:rounded-lg">
+                                <table class="min-w-full">
+                                    <thead class="bg-gray-50 dark:bg-gray-700">
+                                        <tr>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Item Name
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Bidding Date
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Highest Bid
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Status
+                                            </th>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Highest Bidder
+                                            </th>
+
+                                            <th scope="col" class="relative py-3 px-6">
+                                                <span class="sr-only">Edit</span>
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php include "../util/conn.php";
+
+                                        $sql_join = "select barang.nama_barang , lelang.id_barang , masyarakat.nama , lelang.id_masyarakat , lelang.tgl_lelang, lelang.harga_akhir , lelang.status
+                                        FROM lelang
+                                        INNER JOIN barang ON lelang.id_barang = barang.id
+                                        INNER join masyarakat on lelang.id_masyarakat = masyarakat.id";
+                                        $result_join = mysqli_query($conn, $sql_join);
+
+                                        $no = 0;
+                                        while ($item = mysqli_fetch_array($result_join)) {
+                                            $no++;  ?>
+                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    <?= $item["nama_barang"] ?>
+                                                </td>
+
+                                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                    <?= $item['tgl_lelang'] ?>
+
+                                                </td>
+                                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                    <?= $item["harga_akhir"] ?>
+
+                                                </td>
+                                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                    <?= $item["status"] ?>
+
+                                                </td>
+                                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                    <?= $item["nama"] ?>
+
+                                                </td>
+                                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                                    <a href="#" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">Edit</a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
