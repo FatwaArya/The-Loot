@@ -52,16 +52,18 @@ $dt_bid = mysqli_fetch_array($qry_bid);
                 <p>Registered: <?= $dt_product['tgl_daftar'] ?></p>
                 <p>Starting Amount: $<?= $dt_product['harga_awal'] ?></p>
                 <p>Highest bid: $<?php
-
-                                    if (!isset($dt_bid['harga_akhir'])) {
-                                        echo $dt_product['harga_awal'];
-                                    } else {
+                                    if (isset($dt_bid['harga_akhir'])) {
                                         echo $dt_bid['harga_akhir'];
+                                    } else {
+                                        echo $dt_product['harga_awal'];
                                     }
-
-
                                     ?> </p>
-                <p><?= ucfirst($dt_bid['status']) ?></p>
+                <p><?php if (isset($dt_bid['status'])) {
+                        echo ucfirst($dt_bid['status']);
+                    } elseif (!isset($dt_bid['status'])) {
+                        echo 'Available';
+                    }
+                    ?></p>
             </div>
 
         </div>
@@ -75,7 +77,9 @@ $dt_bid = mysqli_fetch_array($qry_bid);
 
             <div class="flex justify-between">
 
-                <button id="sumbit" type="submit" class="text-gray-800 outline outline-1 border-black bg-white hover:bg-gray-800 hover:text-white focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Bid</button>
+                <button id="sumbit" <?php
+                                    if (isset($dt_bid['status'])) {
+                                        if ($dt_bid['status'] === 'sold out') { ?> class="hidden" <?php } ?> <?php } ?> type="submit" class="text-gray-800 outline outline-1 border-black bg-white hover:bg-gray-800 hover:text-white focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Bid</button>
             </div>
         </form>
 
@@ -88,6 +92,11 @@ $dt_bid = mysqli_fetch_array($qry_bid);
     </script>
 
     <script>
+        if ($('#sold-out').val() === 'Sold out') {
+            $('#submit').hide();
+
+        }
+
         function checkHighestBid() {
             let inputPrice = document.getElementById('price').value;
 

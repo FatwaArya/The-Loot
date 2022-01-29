@@ -40,7 +40,86 @@ checkLogin();
 
         </div>
         <!-- code here -->
-        <h1>hello2</h1>
+        <div class="mx-auto">
+            <div class="flex flex-col ">
+                <h1 class="text-center text-xl font-bold mt-10 print:hidden">Item History</h1>
+
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                        <div class="overflow-hidden shadow-md sm:rounded-lg">
+                            <table class="min-w-full">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Item Name
+                                        </th>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Bidding Date
+                                        </th>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Highest Bid
+                                        </th>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Highest Bidder
+                                        </th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php include "../util/conn.php";
+                                    $qry_lelang = 'select * from lelang';
+                                    $result_lelang = mysqli_query($conn, $qry_lelang);
+                                    $bid = mysqli_fetch_array($result_lelang);
+
+                                    $sql_join = "select barang.nama_barang , lelang.id_barang , masyarakat.nama , lelang.id_masyarakat , lelang.tgl_lelang, lelang.harga_akhir , lelang.status, lelang.id
+                                    FROM lelang
+                                    INNER JOIN barang ON lelang.id_barang = barang.id
+                                    INNER join masyarakat on lelang.id_masyarakat = masyarakat.id
+                                    WHERE lelang.id_masyarakat = " . $_SESSION['id'] . " AND lelang.status = 'sold out'
+                               ";
+                                    $result_join = mysqli_query($conn, $sql_join);
+
+
+                                    while ($item = mysqli_fetch_array($result_join)) {
+
+                                    ?>
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                <?= $item["nama_barang"] ?>
+                                            </td>
+
+                                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                <?= $item['tgl_lelang'] ?>
+
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                <?= $item["harga_akhir"] ?>
+
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                <?= $item["status"] ?>
+
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                <?= $item["nama"] ?>
+
+                                            </td>
+
+
+                                        </tr>
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

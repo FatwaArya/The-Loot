@@ -46,7 +46,7 @@ allow_page_access_exclusive(["admin", "staff"])
             </div>
 
 
-            <div class="grid grid-cols-2 gap-4 mt-10">
+            <div class="flex flex-col gap-4 mt-10">
 
                 <div class="flex flex-col ">
                     <h1 class="">Registered Items</h1>
@@ -138,15 +138,16 @@ allow_page_access_exclusive(["admin", "staff"])
                                     </thead>
                                     <tbody>
                                         <?php include "../util/conn.php";
+                                        $qry_lelang = 'select * from lelang';
+                                        $result_lelang = mysqli_query($conn, $qry_lelang);
+                                        $bid = mysqli_fetch_array($result_lelang);
 
-                                        $sql_join = "select barang.nama_barang , lelang.id_barang , masyarakat.nama , lelang.id_masyarakat , lelang.tgl_lelang, lelang.harga_akhir , lelang.status
-                                        FROM lelang
-                                        INNER JOIN barang ON lelang.id_barang = barang.id
-                                        INNER join masyarakat on lelang.id_masyarakat = masyarakat.id";
+                                        $sql_join = "select barang.nama_barang , lelang.id_barang , masyarakat.nama , lelang.id_masyarakat , lelang.tgl_lelang, lelang.harga_akhir , lelang.status, lelang.id FROM lelang INNER JOIN barang ON lelang.id_barang = barang.id INNER join masyarakat on lelang.id_masyarakat = masyarakat.id ORDER BY `lelang`.`id` ASC";
                                         $result_join = mysqli_query($conn, $sql_join);
 
-                                        $no = 0;
+
                                         while ($item = mysqli_fetch_array($result_join)) {
+
                                             $no++;  ?>
                                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -169,8 +170,9 @@ allow_page_access_exclusive(["admin", "staff"])
                                                     <?= $item["nama"] ?>
 
                                                 </td>
+
                                                 <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                                    <a href="#" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">Edit</a>
+                                                    <a href="closebid.php?id=<?php echo $item['id'] ?>" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">Edit</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -186,6 +188,8 @@ allow_page_access_exclusive(["admin", "staff"])
 
 
     </div>
+
+    <script src="https://unpkg.com/@themesberg/flowbite@1.3.0/dist/flowbite.bundle.js"></script>
 
 </body>
 
