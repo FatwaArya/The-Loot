@@ -114,6 +114,63 @@ allow_page_access_exclusive(["admin", "staff"])
                     </div>
                 </div>
             </div>
+            <div class="flex flex-col ">
+                <h1 class="text-center text-xl font-bold mt-10 print:hidden">Bidding Report</h1>
+
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                        <div class="overflow-hidden shadow-md sm:rounded-lg">
+                            <table class="min-w-full">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Name
+                                        </th>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            Email
+                                        </th>
+                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                            username
+                                        </th>
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php include "../util/conn.php";
+
+                                    $sql_join = "select * from masyarakat";
+                                    $result_join = mysqli_query($conn, $sql_join);
+
+
+                                    while ($item = mysqli_fetch_array($result_join)) {
+
+                                    ?>
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                <?= $item["nama"] ?>
+                                            </td>
+
+                                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                <?= $item['email'] ?>
+
+                                            </td>
+                                            <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                <?= $item["username"] ?>
+
+                                            </td>
+
+
+                                        </tr>
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

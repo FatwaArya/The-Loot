@@ -14,10 +14,6 @@ function checkLogin()
     }
 }
 
-function redirectToLogin()
-{
-    redirectTo(__DIR__ . "/login.php");
-}
 function allow_page_access_exclusive($roles)
 {
     $access = false;
@@ -35,6 +31,7 @@ function allow_page_access_exclusive($roles)
     }
 
     if (!$access) {
-        redirectToLogin();
+
+        redirectTo("../../login.php");
     }
 }

@@ -1,8 +1,7 @@
 <?php include '../util/conn.php';
 require_once '../util/guard.php';
 checkLogin();
-
-
+allow_page_access_exclusive('user')
 ?>
 <!doctype html>
 <html lang="en">
